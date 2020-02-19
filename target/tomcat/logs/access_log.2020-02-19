@@ -1,0 +1,3 @@
+0:0:0:0:0:0:0:1 - - [19/Feb/2020:18:15:28 +0800] "GET /shixun HTTP/1.1" 302 - http-bio-8080-exec-1 0
+0:0:0:0:0:0:0:1 - - [19/Feb/2020:18:15:29 +0800] "GET /shixun/ HTTP/1.1" 200 25705 http-bio-8080-exec-3 1564
+0:0:0:0:0:0:0:1 - - [19/Feb/2020:18:15:30 +0800] "GET /shixun/studentPage?pn=1 HTTP/1.1" 200 1968 http-bio-8080-exec-4 875

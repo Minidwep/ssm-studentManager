@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.minidwep.crud.dao.ClassesMapper">
+  <resultMap id="BaseResultMap" type="com.minidwep.crud.bean.Classes">
+    <id column="classes_id" jdbcType="INTEGER" property="classesId" />
+    <result column="classes_name" jdbcType="VARCHAR" property="classesName" />
+    <result column="classes_date" jdbcType="VARCHAR" property="classesDate" />
+    <result column="classes_specialty" jdbcType="VARCHAR" property="classesSpecialty" />
+    <result column="classes_direction" jdbcType="VARCHAR" property="classesDirection" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    classes_id, classes_name, classes_date, classes_specialty, classes_direction
+  </sql>
+  <select id="selectByExample" parameterType="com.minidwep.crud.bean.ClassesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tbl_classes
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_classes
+    where classes_id = #{classesId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tbl_classes
+    where classes_id = #{classesId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.minidwep.crud.bean.ClassesExample">
+    delete from tbl_classes
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.minidwep.crud.bean.Classes">
+    insert into tbl_classes (classes_id, classes_name, classes_date, 
+      classes_specialty, classes_direction)
+    values (#{classesId,jdbcType=INTEGER}, #{classesName,jdbcType=VARCHAR}, #{classesDate,jdbcType=VARCHAR}, 
+      #{classesSpecialty,jdbcType=VARCHAR}, #{classesDirection,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minidwep.crud.bean.Classes">
+    insert into tbl_classes
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="classesId != null">
+        classes_id,
+      </if>
+      <if test="classesName != null">
+        classes_name,
+      </if>
+      <if test="classesDate != null">
+        classes_date,
+      </if>
+      <if test="classesSpecialty != null">
+        classes_specialty,
+      </if>
+      <if test="classesDirection != null">
+        classes_direction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="classesId != null">
+        #{classesId,jdbcType=INTEGER},
+      </if>
+      <if test="classesName != null">
+        #{classesName,jdbcType=VARCHAR},
+      </if>
+      <if test="classesDate != null">
+        #{classesDate,jdbcType=VARCHAR},
+      </if>
+      <if test="classesSpecialty != null">
+        #{classesSpecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="classesDirection != null">
+        #{classesDirection,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.minidwep.crud.bean.ClassesExample" resultType="java.lang.Long">
+    select count(*) from tbl_classes
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tbl_classes
+    <set>
+      <if test="record.classesId != null">
+        classes_id = #{record.classesId,jdbcType=INTEGER},
+      </if>
+      <if test="record.classesName != null">
+        classes_name = #{record.classesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classesDate != null">
+        classes_date = #{record.classesDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classesSpecialty != null">
+        classes_specialty = #{record.classesSpecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classesDirection != null">
+        classes_direction = #{record.classesDirection,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tbl_classes
+    set classes_id = #{record.classesId,jdbcType=INTEGER},
+      classes_name = #{record.classesName,jdbcType=VARCHAR},
+      classes_date = #{record.classesDate,jdbcType=VARCHAR},
+      classes_specialty = #{record.classesSpecialty,jdbcType=VARCHAR},
+      classes_direction = #{record.classesDirection,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minidwep.crud.bean.Classes">
+    update tbl_classes
+    <set>
+      <if test="classesName != null">
+        classes_name = #{classesName,jdbcType=VARCHAR},
+      </if>
+      <if test="classesDate != null">
+        classes_date = #{classesDate,jdbcType=VARCHAR},
+      </if>
+      <if test="classesSpecialty != null">
+        classes_specialty = #{classesSpecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="classesDirection != null">
+        classes_direction = #{classesDirection,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where classes_id = #{classesId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minidwep.crud.bean.Classes">
+    update tbl_classes
+    set classes_name = #{classesName,jdbcType=VARCHAR},
+      classes_date = #{classesDate,jdbcType=VARCHAR},
+      classes_specialty = #{classesSpecialty,jdbcType=VARCHAR},
+      classes_direction = #{classesDirection,jdbcType=VARCHAR}
+    where classes_id = #{classesId,jdbcType=INTEGER}
+  </update>
+</mapper>
